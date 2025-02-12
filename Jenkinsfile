@@ -3,26 +3,29 @@ pipeline{
   stages{
     stage('scm checkout'){
       steps{
-        git 'https://github.com/PradipRandive/maven-project.git'
+        git branch: 'master', url: 'https://github.com/PradipRandive/maven-project.git'
       }
-    }stage('mvn validate'){
+    }
+    stage('scm validate'){
       steps{
-        withMaven(globalMavenSettingsConfig: '', jdk: 'JAVA_HOME', maven: 'MVN_HOME', mavenSettingsConfig: '', traceability: true) {
-    sh 'mvn validate'
+        withMaven(globalMavenSettingsConfig: '', jdk: 'JAVA_HOME', maven: 'MVN_HOME', mavenSettingsConfig: '', traceability: true){
+          sh 'mvn validate'
         }
       }
-    }stage('mvn compile'){
+    }
+    stage('scm comile'){
       steps{
-        withMaven(globalMavenSettingsConfig: '', jdk: 'JAVA_HOME', maven: 'MVN_HOME', mavenSettingsConfig: '', traceability: true) {
-        sh 'mvn compile'
+        withMaven(globalMavenSettingsConfig: '', jdk: 'JAVA_HOME', maven: 'MVN_HOME', mavenSettingsConfig: '', traceability: true){
+          sh 'mvn compile'
+        }
       }
     }
-  }stage('mvn pacakge'){
-    steps{
-      withMaven(globalMavenSettingsConfig: '', jdk: 'JAVA_HOME', maven: 'MVN_HOME', mavenSettingsConfig: '', traceability: true) {
-        sh 'mvn package'
+    stage('scm package'){
+      steps{
+        withMaven(globalMavenSettingsConfig: '', jdk: 'JAVA_HOME', maven: 'MVN_HOME', mavenSettingsConfig: '', traceability: true){
+          sh 'mvn packge'
+        }
+      }
     }
-  }
-}
   }
 }
