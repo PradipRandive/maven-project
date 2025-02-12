@@ -23,7 +23,7 @@ pipeline{
     stage('scm package'){
       steps{
         withMaven(globalMavenSettingsConfig: '', jdk: 'JAVA_HOME', maven: 'MVN_HOME', mavenSettingsConfig: '', traceability: true){
-          sh 'mvn packge'
+          sh 'mvn package'
         }
       }
     }
