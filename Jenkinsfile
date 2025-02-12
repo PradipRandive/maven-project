@@ -1,31 +1,26 @@
 pipeline{
-    agent any
-    stages{
-        stage('scm checkout'){
-            steps{
-             git branch: 'main', url: 'https://github.com/PradipRandive/pipelines.git'
-            }
+  agent any
+  stages{
+    stage('scm checkout'){
+      steps{
+        git 'https://github.com/PradipRandive/maven-project.git'
+      }
+    }stage('mvn validate'){
+      steps{
+        withMaven(globalMavenSettingsConfig: '', jdk: 'JAVA_HOME', maven: 'MVN_HOME', mavenSettingsConfig: '', traceability: true) {
+    sh 'mvn validate'
         }
-        stage('validate the code'){
-            steps{
-              withMaven(globalMavenSettingsConfig: '', jdk: 'JAVA_HOME', maven: 'MVN_HOME', mavenSettingsConfig: '', traceability: true) {
-                  sh 'mvn validate'
-            }
-        }
-        stage('compile the code'){
-            steps{
-              withMaven(globalMavenSettingsConfig: '', jdk: 'JAVA_HOME', maven: 'MVN_HOME', mavenSettingsConfig: '', traceability: true) {
-                  sh 'mvn compile'
-            }
-        }
-        stage('package the code'){
-            steps{
-              withMaven(globalMavenSettingsConfig: '', jdk: 'JAVA_HOME', maven: 'MVN_HOME', mavenSettingsConfig: '', traceability: true) {
-                  sh 'mvn package'
-            }
-        }
+      }
+    }stage('mvn compile'){
+      steps{
+        withMaven(globalMavenSettingsConfig: '', jdk: 'JAVA_HOME', maven: 'MVN_HOME', mavenSettingsConfig: '', traceability: true) {
+        sh 'mvn compile'
+      }
     }
-        }
-        }
+  }stage('mvn pacakge'){
+    steps{
+      withMaven(globalMavenSettingsConfig: '', jdk: 'JAVA_HOME', maven: 'MVN_HOME', mavenSettingsConfig: '', traceability: true) {
+        sh 'mvn package'
     }
+  }
 }
