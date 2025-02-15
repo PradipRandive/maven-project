@@ -23,7 +23,10 @@ pipeline{
     stage('scm package'){
       steps{
         withMaven(globalMavenSettingsConfig: '', jdk: 'JAVA_HOME', maven: 'MVN_HOME', mavenSettingsConfig: '', traceability: true){
-          sh 'mvn package'
+          withSonarQubeEnv(credentialsId: 'sonar',installationName: 'sonar') {
+               sh 'mvn package sonar:sonar'
+         }
+          
         }
       }
     }
