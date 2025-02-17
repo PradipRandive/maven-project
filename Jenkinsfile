@@ -23,13 +23,20 @@ pipeline{
     stage('scm package'){
       steps{
         withMaven(globalMavenSettingsConfig: '', jdk: 'JAVA_HOME', maven: 'MVN_HOME', mavenSettingsConfig: '', traceability: true){
-          withSonarQubeEnv(credentialsId: 'sonar',installationName: 'sonar') {
-               sh 'mvn package sonar:sonar'
-         }
-          
+          sh 'mvn package'
         }
       }
     }
+    // // stage('scm package'){
+    //   steps{
+    //     withMaven(globalMavenSettingsConfig: '', jdk: 'JAVA_HOME', maven: 'MVN_HOME', mavenSettingsConfig: '', traceability: true){
+    //       withSonarQubeEnv(credentialsId: 'sonar',installationName: 'sonar') {
+    //            sh 'mvn package sonar:sonar'
+    //      }
+          
+    //     }
+    //   }
+    // }
   //  stage('deploy the code'){
   //     steps{
   //       sshagent(['DEvCICD']){
