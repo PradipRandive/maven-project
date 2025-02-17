@@ -6,21 +6,21 @@ pipeline{
         git branch: 'master', url: 'https://github.com/PradipRandive/maven-project.git'
       }
     }
-    stage('scm validate'){
+    stage('mvn validate'){
       steps{
         withMaven(globalMavenSettingsConfig: '', jdk: 'JAVA_HOME', maven: 'MVN_HOME', mavenSettingsConfig: '', traceability: true){
           sh 'mvn validate'
         }
       }
     }
-    stage('scm compile'){
+    stage('mvn compile'){
       steps{
         withMaven(globalMavenSettingsConfig: '', jdk: 'JAVA_HOME', maven: 'MVN_HOME', mavenSettingsConfig: '', traceability: true){
           sh 'mvn compile'
         }
       }
     }
-    stage('scm package'){
+    stage('mvn package'){
       steps{
         withMaven(globalMavenSettingsConfig: '', jdk: 'JAVA_HOME', maven: 'MVN_HOME', mavenSettingsConfig: '', traceability: true){
           sh 'mvn package'
