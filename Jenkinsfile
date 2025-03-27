@@ -27,18 +27,18 @@ pipeline{
         }
       }
     }
-    stage('create docker image'){
-      steps{
-        sh 'docker build -t prandive/tomcat:v1.0 .'
-      }
-    }
-    stage('Push docker image into dockerhub'){
-      steps{
-        withDockerRegistry(credentialsId: 'DockerHubCredetials', url: 'https://index.docker.io/v1/') {
-          sh 'docker push prandive/tomcat:v1.0'
-        }
-      }
-    }
+  //stage('create docker image'){
+     // steps{
+     //   sh 'docker build -t prandive/tomcat:v1.0 .'
+     // }
+    //}
+    //stage('Push docker image into dockerhub'){
+     // steps{
+      //  withDockerRegistry(credentialsId: 'DockerHubCredetials', url: 'https://index.docker.io/v1/') {
+      //    sh 'docker push prandive/tomcat:v1.0'
+       // }
+     // }
+   // }
     // // stage('scm package'){
     //   steps{
     //     withMaven(globalMavenSettingsConfig: '', jdk: 'JAVA_HOME', maven: 'MVN_HOME', mavenSettingsConfig: '', traceability: true){
