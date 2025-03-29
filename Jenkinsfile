@@ -39,22 +39,22 @@ pipeline{
        // }
      // }
    // }
-    // // stage('scm package'){
-    //   steps{
-    //     withMaven(globalMavenSettingsConfig: '', jdk: 'JAVA_HOME', maven: 'MVN_HOME', mavenSettingsConfig: '', traceability: true){
-    //       withSonarQubeEnv(credentialsId: 'sonar',installationName: 'sonar') {
-    //            sh 'mvn package sonar:sonar'
-    //      }
+     stage('scm package'){
+     steps{
+         withMaven(globalMavenSettingsConfig: '', jdk: 'JAVA_HOME', maven: 'MVN_HOME', mavenSettingsConfig: '', traceability: true){
+           withSonarQubeEnv(credentialsId: 'sonar',installationName: 'sonar') {
+               sh 'mvn package sonar:sonar'
+          }
           
-    //     }
-    //   }
-    // }
-    stage('deploy the code'){
-      steps{
-        sshagent(['Tomcat_server']){
-          sh 'scp -o StrictHostKeyChecking=no webapp/target/webapp.war ec2-user@10.100.0.12:/usr/share/tomcat/webapps'
         }
+      }
      }
-     }
+    //stage('deploy the code'){
+     // steps{
+      //  sshagent(['Tomcat_server']){
+        //  sh 'scp -o StrictHostKeyChecking=no webapp/target/webapp.war ec2-user@10.100.0.12:/usr/share/tomcat/webapps'
+       // }
+     //}
+     //}
   }
 }
