@@ -34,7 +34,7 @@ pipeline{
     }
    stage('Push docker image into dockerhub'){
       steps{
-        withDockerRegistry(credentialsId: 'DockerHubCredetials', url: 'https://index.docker.io/v1/') {
+        withDockerRegistry(credentialsId: 'DockerHub', url: 'https://index.docker.io/v1/') {
           sh 'docker push prandive/tomcat:v1.0'
         }
       }
