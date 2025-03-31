@@ -20,13 +20,13 @@ pipeline{
         }
       }
     }
-    //stage('mvn package'){
-      //steps{
-      //  withMaven(globalMavenSettingsConfig: '', jdk: 'JAVA_HOME', maven: 'MVN_HOME', mavenSettingsConfig: '', traceability: true){
-       //   sh 'mvn clean -B -DskipTests package'
-       // }
-     // }
-    //}
+    stage('mvn package'){
+      steps{
+       withMaven(globalMavenSettingsConfig: '', jdk: 'JAVA_HOME', maven: 'MVN_HOME', mavenSettingsConfig: '', traceability: true){
+          sh 'mvn clean -B -DskipTests package'
+        }
+      }
+    }
   //stage('create docker image'){
      // steps{
      //   sh 'docker build -t prandive/tomcat:v1.0 .'
@@ -39,16 +39,16 @@ pipeline{
        // }
      // }
    // }
-     stage('mvn package'){
-     steps{
-         withMaven(globalMavenSettingsConfig: '', jdk: 'JAVA_HOME', maven: 'MVN_HOME', mavenSettingsConfig: '', traceability: true){
-           withSonarQubeEnv(credentialsId: 'sonar-token',installationName: 'sonar') {
-               sh 'mvn package sonar:sonar'
-          }
+     //stage('mvn package'){
+     //steps{
+       //  withMaven(globalMavenSettingsConfig: '', jdk: 'JAVA_HOME', maven: 'MVN_HOME', mavenSettingsConfig: '', traceability: true){
+         //  withSonarQubeEnv(credentialsId: 'sonar-token',installationName: 'sonar') {
+         //      sh 'mvn package sonar:sonar'
+        //  }
           
-        }
-      }
-     }
+       // }
+    //  }
+    // }
     //stage('deploy the code'){
      // steps{
       //  sshagent(['Tomcat_server']){
