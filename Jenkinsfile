@@ -30,6 +30,16 @@ pipeline{
         }
       
     }
+    stage('Deploy the package'){
+      steps{
+          sshagent(['TomcatServer']) {
+          sh 'StrictHostKeyChecking=no webapp/target/webapp.war ec2-user@10.100.0.54:/usr/share/tomcat/webapps '
+           }
+            
+          }
+        }
+      
+    }
    
   }
 }
