@@ -30,15 +30,19 @@ pipeline{
         }
       
     }
-    stage('Deploy the package'){
-      steps{
-           sshagent(['TomcatServer']) {
-              sh ' scp -o StrictHostKeyChecking=no webapp/target/webapp.war ec2-user@10.100.0.54:/usr/share/tomcat/webapps'
-           }
+    //stage('Deploy the package'){
+     // steps{
+          // sshagent(['TomcatServer']) {
+             // sh ' scp -o StrictHostKeyChecking=no webapp/target/webapp.war ec2-user@10.100.0.54:/usr/share/tomcat/webapps'
+          // }
             
-          }
-    }
-      
+          //}
+    //}
+    stage('copy artifact'){
+      steps{
+        sshPublisher(publishers: [sshPublisherDesc(configName: 'Docker_Server', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: 'home/dockeradmin', remoteDirectorySDF: false, removePrefix: 'webapp/target', sourceFiles: ' webapp/target/*.war')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
+      }
+    }      
     
    
   }
