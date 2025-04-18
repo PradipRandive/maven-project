@@ -58,7 +58,7 @@ pipeline{
       steps{
           sshPublisher(publishers: [sshPublisherDesc(configName: 'ansible-server', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '''ansible-playbook /opt/docker/regapp.yml;
           sleep 30;
-          ansible-playbook/opt.docker/deploy_regapp.yml;''', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: 'webapp/target/', remoteDirectorySDF: false, removePrefix: 'webapp/target/*.war', sourceFiles: '')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
+          ansible-playbook /opt/docker/deploy_regapp.yml;''', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: 'webapp/target/', remoteDirectorySDF: false, removePrefix: 'webapp/target/*.war', sourceFiles: '')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
       }
     }
    
